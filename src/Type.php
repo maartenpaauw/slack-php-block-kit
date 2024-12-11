@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace SlackPhp\BlockKit;
 
-use SlackPhp\BlockKit\{Blocks, Elements, Parts, Surfaces};
 use SlackPhp\BlockKit\Blocks\Virtual;
 use SlackPhp\BlockKit\Elements\Selects;
+use SlackPhp\BlockKit\Elements\RichTexts;
 
 enum Type: string
 {
@@ -26,6 +26,7 @@ enum Type: string
     case FILE        = 'file';
     case HEADER      = 'header';
     case INPUT       = 'input';
+    case RICH_TEXT   = 'rich_text';
     case SECTION     = 'section';
 
     // Elements
@@ -48,6 +49,11 @@ enum Type: string
     case PLAIN_TEXT_INPUT           = 'plain_text_input';
     case TIMEPICKER                 = 'timepicker';
     case NUMBER_INPUT               = 'number_input';
+    case BROADCAST                  = 'broadcast';
+    case RICH_TEXT_LIST             = 'rich_text_list';
+    case RICH_TEXT_PREFORMATTED     = 'rich_text_preformatted';
+    case RICH_TEXT_QUOTE            = 'rich_text_quote';
+    case RICH_TEXT_SECTION          = 'rich_text_section';
 
     // Parts (aka Composition Objects)
     case CONFIRM                = 'confirm';
@@ -58,7 +64,6 @@ enum Type: string
     case OPTION                 = 'option';
     case OPTION_GROUP           = 'option_group';
     case PLAINTEXT              = 'plain_text';
-
     /** @var array<string, self> */
     private const TYPE_MAP = [
         // Surfaces
@@ -77,6 +82,7 @@ enum Type: string
         Blocks\File::class       => self::FILE,
         Blocks\Header::class     => self::HEADER,
         Blocks\Input::class      => self::INPUT,
+        Blocks\RichText::class   => self::RICH_TEXT,
         Blocks\Section::class    => self::SECTION,
 
         // Virtual Blocks
@@ -105,6 +111,13 @@ enum Type: string
         Selects\ExternalSelectMenu::class           => self::SELECT_EXTERNAL,
         Selects\StaticSelectMenu::class             => self::SELECT_STATIC,
         Selects\UserSelectMenu::class               => self::SELECT_USERS,
+
+        // Rich Texts
+        RichTexts\Broadcast::class            => self::BROADCAST,
+        RichTexts\RichTextList::class         => self::RICH_TEXT_LIST,
+        RichTexts\RichTextPreformatted::class => self::RICH_TEXT_PREFORMATTED,
+        RichTexts\RichTextQuote::class        => self::RICH_TEXT_QUOTE,
+        RichTexts\RichTextSection::class      => self::RICH_TEXT_SECTION,
 
         // Parts (aka Composition Objects)
         Parts\Confirm::class              => self::CONFIRM,
